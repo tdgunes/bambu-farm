@@ -19,9 +19,13 @@ fn main() {
     cxx_build::bridge("src/api.rs")
         .file("cpp/api.cpp")
         .include("cpp")
+        .include("/opt/homebrew/include")
         .flag_if_supported("-std=c++11")
         .flag_if_supported("-Wno-unused-parameter")
+        .flag("-DBOOST_ALL_NO_LIB")  // Disable auto-linking of Boost libraries
+        .flag("-DBOOST_THREAD_USE_LIB")  // Specific Boost library flags if needed
         // .link_lib_modifier("+whole-archive")
+        .flag_if_supported("-arch arm64")
         .compile("bambu_networking_api");
 
     tonic_build::compile_protos("../bambu-farm-server/proto/service.proto").unwrap();

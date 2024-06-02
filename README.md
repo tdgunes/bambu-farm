@@ -18,6 +18,30 @@ Currently you can control and monitor the printer's vitals, jog and home the axe
 
 Off the top of my head, you'll need Rust/Cargo, OpenSSL (development packages), GNU Make, a C/C++ build system, a protocol buffers compiler (protoc), cURL, and a little bit of determination to fix any issues that come up. Some of my projects are very highly polished, but this is not one of them.
 
+### Mac OS X Sonoma 14.5 Apple Silicon Specific
+
+1. Make sure you have `cargo` installed.
+2. `brew install boost msgpack-cxx protobuf`
+3. `make`
+4. `cd bambu-farm-client/target/aarch64-apple-darwin/debug`
+5. `mkdir shared`
+6. `cd shared`
+
+(These are adapted from the Makefiles):
+
+7. `ar -x ../libbambu_farm_client.a`
+8. `gcc -shared *.o -o libbambu_networking.so -lc++`
+9. `echo "" | gcc -fPIC -shared -x c -o libBambuSource.so -`
+10. `rm *.o`
+
+At this point you will have `libbambu_networking.so` and `libBambuSource.so`.
+
+Copy these to: `/Library/Application Support/OrcaSlicer/plugins`
+
+Start the `OrcaSlicer`!
+
+Disclaimer: However, I couldn't make it work and observed OrcaSlicer re-downloading the proprietary libraries.
+
 ## Get involved!
 
 If a feature you need is missing open an issue to run it by me, but it's very likely I want that feature and will accept a PR for it. A lot of the cruft in this project exists for a reason, so open an issue before you try any major refactors, or try to switch around dependencies and stuff. There's a good chance I've already tried what you have in mind and lost a few hours of my life to it.
