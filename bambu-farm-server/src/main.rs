@@ -269,8 +269,12 @@ fn construct_printer(config: Value) -> Option<Printer> {
             "x1c" => "3DPrinter-X1-Carbon",
             "x1" => "3DPrinter-X1",
             "p1p" => "C11",
+            "p1s" => "C12",
+            "a1" => "N2S",
+            "a1mini" => "N1", // for instance, https://github.com/SoftFever/OrcaSlicer/blob/9b7b11e066196d513225416f171f676c2eb96e2c/resources/printers/N1.json
+                              // this is the printer type
             _ => {
-                eprintln!("Expected printer field `model` to be one of [`p1p`, `x1`, `x1c`].");
+                eprintln!("Expected printer field `model` to be one of [`x1`, `x1c`, `p1p`, 'p1s', 'a1', 'a1mini'].");
                 return None;
             }
         }

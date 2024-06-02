@@ -30,8 +30,8 @@ Off the top of my head, you'll need Rust/Cargo, OpenSSL (development packages), 
 (These are adapted from the Makefiles):
 
 7. `ar -x ../libbambu_farm_client.a`
-8. `gcc -shared *.o -o libbambu_networking.so -lc++`
-9. `echo "" | gcc -fPIC -shared -x c -o libBambuSource.so -`
+8. `gcc -shared *.o -o libbambu_networking.dylib -lc++`
+9. `echo "" | gcc -fPIC -shared -x c -o libBambuSource.dylib -`
 10. `rm *.o`
 
 At this point you will have `libbambu_networking.so` and `libBambuSource.so`.
